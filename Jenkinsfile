@@ -4,18 +4,14 @@ node {
 }
 node {
    stage 'Stage 1'
-   echo 'Jopa Jopa Jopa'
-   stage 'Stage 2'
+   echo 'git checkout'
    echo 'JJOOPPAA JJOOPPAA JJOOPPAA'
 }
-node {
-    stage 'Stage 3'
-    sh 'rm -rf *'
-    sh 'ls -l'
+//node {
     //sh 'echo AOEU=$(echo aoeu) > propsfile'
-}
+//}
 node{
-    stage 'Stage 4'
+    stage 'Stage 2'
     gitClean()
     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '1', url: 'git@github.com:ARMmbed/ta-TZInfra.git']]])
 }
@@ -48,8 +44,18 @@ def gitClean() {
     }
 }
 node {
-    stage 'Stage 5'
-    sh './tests_builder.sh'
+    stage 'Stage 3'
+    echo '#build HDCP'
+    sh 'export head=~/ta-DxHDCP/'
+    sh 'cd $head/HDCP'
+    sh './buildHdcp.sh -p Qualcomm -s AndroidTZ4_0'
+}
+node {
+    stage 'Stage 3'
+    echo '#build QA'
+    sh 'cd ../'
+    sh './QA_DxHDCP_TST/Scripts/BuildQA_Package.sh PLATFORM=QualcommAndroidTZ4_0_SCP'
+    sh './QA_TST.release.32bit/Scripts/Compile.sh'
 }
 node {
     stage 'Stage 6'
