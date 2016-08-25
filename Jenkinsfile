@@ -52,5 +52,6 @@ node {
     sh './tests_builder.sh'
 }
 node {
-    //mail bcc: '', body: 'build finished', cc: '', from: '', replyTo: '', subject: 'pipeline_news', to: 'igor.haykin@sansasecurity.com'
+    stage 'Stage 6'
+    mail bcc: '', body: 'build finished', cc: '', from: '', replyTo: '', subject: 'pipeline_news', to: 'igor.haykin@sansasecurity.com'
 }
