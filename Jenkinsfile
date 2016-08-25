@@ -52,5 +52,5 @@ node {
     sh './tests_builder.sh'
 }
 node {
-    echo 'jopa rastet i rastet'
+    //mail bcc: '', body: 'build finished', cc: '', from: '', replyTo: '', subject: 'pipeline_news', to: 'igor.haykin@sansasecurity.com'
 }
