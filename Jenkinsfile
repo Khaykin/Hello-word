@@ -13,7 +13,7 @@ node {
 node{
     stage 'Stage 2'
     gitClean()
-    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '1', url: 'git@github.com:ARMmbed/ta-TZInfra.git']]])
+    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '1', url: 'git@github.com:ARMmbed/ta-DxHDCP.git']]])
 }
 /**
  * Clean a Git project workspace.
@@ -47,7 +47,7 @@ node {
     stage 'Stage 3'
     echo '#build HDCP'
     //sh 'export head=/var/lib/jenkins/workspace/learn_pipeline/Hello-word/master/ta-DxHDCP/'
-    sh 'cd /var/lib/jenkins/workspace/learn_pipeline/Hello-word/master@tmp/ta-DxHDCP/HDCP'
+    sh 'cd /var/lib/jenkins/workspace/learn_pipeline/Hello-word/master/ta-DxHDCP/HDCP'
     sh './buildHdcp.sh -p Qualcomm -s AndroidTZ4_0'
 }
 node {
