@@ -47,8 +47,8 @@ node {
     stage 'Stage 3'
     echo '#build HDCP'
     //sh 'export head=/var/lib/jenkins/workspace/learn_pipeline/Hello-word/master/ta-DxHDCP/'
-    sh 'cd /var/lib/jenkins/workspace/learn_pipeline/Hello-word/master/ta-DxHDCP/HDCP'
-    sh './buildHdcp.sh -p Qualcomm -s AndroidTZ4_0'
+    //sh 'cd /var/lib/jenkins/workspace/learn_pipeline/Hello-word/master/ta-DxHDCP/HDCP'
+    sh './var/lib/jenkins/workspace/learn_pipeline/Hello-word/master/ta-DxHDCP/HDCP/buildHdcp.sh -p Qualcomm -s AndroidTZ4_0'
 }
 node {
     stage 'Stage 4'
