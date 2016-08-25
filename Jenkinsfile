@@ -51,13 +51,13 @@ node {
     sh './buildHdcp.sh -p Qualcomm -s AndroidTZ4_0'
 }
 node {
-    stage 'Stage 3'
+    stage 'Stage 4'
     echo '#build QA'
     sh 'cd ../'
     sh './QA_DxHDCP_TST/Scripts/BuildQA_Package.sh PLATFORM=QualcommAndroidTZ4_0_SCP'
     sh './QA_TST.release.32bit/Scripts/Compile.sh'
 }
 node {
-    stage 'Stage 6'
+    stage 'Stage 5'
     mail bcc: '', body: 'build finished', cc: '', from: '', replyTo: '', subject: 'pipeline_news', to: 'igor.haykin@sansasecurity.com'
 }
