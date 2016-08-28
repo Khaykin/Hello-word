@@ -48,7 +48,7 @@ node {
     echo '#build HDCP QA PostBuild'
     node {
 dir('/var/lib/jenkins/workspace/learn_pipeline/Hello-word/master/Scripts/') {
-    sh 'python build_hdcp_and_tests.py -p Qualcomm -s AndroidTZ4_0'
+    sh 'python build_hdcp_and_tests.py -p Qualcomm -m MSM8996_LA2.0 -v 01450.1 -c yes'
 }} 
 
 node {
