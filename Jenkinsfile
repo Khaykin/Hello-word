@@ -45,20 +45,12 @@ def gitClean() {
 }
 node {
     stage 'Stage 3'
-    echo '#build HDCP'
+    echo '#build HDCP QA PostBuild'
     node {
-dir('/var/lib/jenkins/workspace/learn_pipeline/Hello-word/master/HDCP/') {
-    sh './buildHdcp.sh -p Qualcomm -s AndroidTZ4_0'
+dir('/var/lib/jenkins/workspace/learn_pipeline/Hello-word/master/Scripts/') {
+    sh 'python build_hdcp_and_tests.py -p Qualcomm -s AndroidTZ4_0'
 }} 
 
-node {
-    stage 'Stage 4'
-    echo '#build QA'
-    dir('/var/lib/jenkins/workspace/learn_pipeline/Hello-word/master') {
-    sh './QA_DxHDCP_TST/Scripts/BuildQA_Package.sh PLATFORM=QualcommAndroidTZ4_0_SCP'
-    sh './QA_TST.release.32bit/Scripts/Compile.sh'
-}
-}
 node {
     stage 'Stage 5'
     mail bcc: '', body: 'build finished', cc: '', from: '', replyTo: '', subject: 'pipeline_news', to: 'igor.haykin@sansasecurity.com'
