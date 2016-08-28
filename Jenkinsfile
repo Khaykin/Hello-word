@@ -43,15 +43,15 @@ def gitClean() {
         }
     }
 }
+echo 'build'
+
+
 node {
-    stage 'Stage 3'
-    echo '#build HDCP QA PostBuild'
-    node {
-dir('/var/lib/jenkins/workspace/learn_pipeline/Hello-word/master/Scripts/') {
-    sh 'python build_hdcp_and_tests.py -p Qualcomm -m MSM8996_LA2.0 -v 01450.1 -c yes'
-}} 
+    sh './Scripts/build_hdcp_and_tests.py -p Qualcomm -m MSM8996_LA2.0 -v 01450.1 -c yes'
+}
+echo 'DECKIY CEREBRALNY POSTROEN'
 
 node {
     stage 'Stage 5'
-    mail bcc: '', body: 'build finished', cc: '', from: '', replyTo: '', subject: 'pipeline_news', to: 'igor.haykin@sansasecurity.com'
+    mail bcc: '', body: 'build finished DECKIY CEREBRALNY POSTROEN!!!', cc: '', from: '', replyTo: '', subject: 'DECKIY CEREBRALNY POSTROEN', to: 'igor.haykin@sansasecurity.com'
 }
