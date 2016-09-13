@@ -1,4 +1,4 @@
-  QC_Jtag_Flash_General
+ # QC_Jtag_Flash_General
 
 - This Page Describes How to Flash Qualcomm Fluid or MDP 
   QSEE Jtag Flash 
