@@ -1,208 +1,93 @@
-<div id="header">
+# QFIL Flash msm8974#
 
-<div>
+## Contents:
+    1.  QFIL introduction:
+    2.  Requirements
+    3.  Target Device State
+    4.  Using QFIL
+    5.  QPST installation:
+    6.  Drivers for Qualcomm devices
+    7.  Using Debug Board
 
-Search:
-
-</div>
-
-<div id="logo">
-
-[![MoinMoin Logo](/moin_static194/common/moinmoin.png)](/FrontPage)
-
-</div>
-
-<span id="pagelocation"><span class="pagepath">[CP](/CP)<span class="sep">/</span>[PRODUCTS](/CP/PRODUCTS)<span class="sep">/</span>[HA](/CP/PRODUCTS/HA)<span class="sep">/</span>[KB](/CP/PRODUCTS/HA/KB){.nonexistent}<span class="sep">/</span>[Partners](/CP/PRODUCTS/HA/KB/Partners){.nonexistent}<span class="sep">/</span>[Qualcomm](/CP/PRODUCTS/HA/KB/Partners/Qualcomm)</span><span class="sep">/</span>[QFIL Flash msm8974](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=fullsearch&value=linkto%3A%22CP%2FPRODUCTS%2FHA%2FKB%2FPartners%2FQualcomm%2FQFIL+Flash+msm8974%22&context=180 "Click to do a full-text search for this title"){.backlink}</span> {#locationline}
-============================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-
--   [RecentChanges](/RecentChanges)
--   [FindPage](/FindPage)
--   [HelpContents](/HelpContents)
--   [QFIL Flash
-    msm8974](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974)
-
-<div id="pageline">
-
-------------------------------------------------------------------------
-
-</div>
-
-</div>
-
-<div id="page" lang="en" dir="ltr">
-
-<div id="content" dir="ltr" lang="en">
-
-<span id="top" class="anchor"></span> <span id="line-1"
-class="anchor"></span>
-
-QFIL Flash msm8974 {#QFIL_Flash_msm8974}
-==================
-
-<span id="line-2" class="anchor"></span><span id="line-3"
-class="anchor"></span>
-
-<div class="table-of-contents">
-
-Contents
-
-1.  [QFIL Flash msm8974](#QFIL_Flash_msm8974)
-    1.  [QFIL introduction:](#QFIL_introduction:)
-    2.  [Requirements:](#Requirements:)
-    3.  [Target Device State](#Target_Device_State)
-    4.  [Using QFIL](#Using_QFIL)
-    5.  [QPST installation:](#QPST_installation:)
-    6.  [Drivers for Qualcomm devices.](#Drivers_for_Qualcomm_devices.)
-    7.  [Using Debug Board](#Using_Debug_Board)
-
-</div>
-
-<span id="line-4" class="anchor"></span><span id="line-5"
-class="anchor"></span><span id="line-6" class="anchor"></span><span
-id="line-7" class="anchor"></span>
-
-QFIL introduction: {#QFIL_introduction:}
-------------------
-
-<span id="line-8" class="anchor"></span>
-· The Qualcomm Flash Image Loader (QFIL) is software which is integrated
+## QFIL introduction:
+* **The Qualcomm Flash _Image_ Loader (QFIL)** is software which is integrated
 in Qualcomm Product Support Tool (QPST™) used to flash a build image
 into a Target Device in Emergency Download (EDL) mode or High Level OS
-(HLOS) mode (normal Android Bootup). <span id="line-9"
-class="anchor"></span><span id="line-10" class="anchor"></span>
-
-· This tool can recover devices that are in a bad state and cannot be
+(HLOS) mode (normal Android Bootup). 
+* This tool can recover devices that are in a bad state and cannot be
 flashed using J-TAG (i.e., do not have J-TAG port enabled, e.g.,
-Bsquare, Intrisyc devices). <span id="line-11"
-class="anchor"></span><span id="line-12" class="anchor"></span>
-
-. QFIL have 2 possible options to flash Images: <span id="line-13"
-class="anchor"></span><span id="line-14" class="anchor"></span>
-
--   By connecting Target Device to the Windows PC using USB cable as
-    described in part "Using QFIL" <span id="line-15"
-    class="anchor"></span><span id="line-16" class="anchor"></span>
--   By connecting Target Device to the Windows PC using debug board as
+Bsquare, Intrisyc devices). 
+* QFIL have 2 possible options to flash Images: 
+  -   By connecting Target Device to the Windows PC using USB cable as
+    described in part "Using QFIL" 
+  *   By connecting Target Device to the Windows PC using debug board as
     described in part "Using Debug Board". Debug board needed, if Target
     Device not recognized by PC, see part bellow "Drivers for Qualcomm
-    devices" <span id="line-17" class="anchor"></span><span id="line-18"
-    class="anchor"></span>
+    devices" 
 
-. ![{i}](/moin_static194/modernized/img/icon-info.png "{i}"){width="16"
-height="16"} **NOTE**: QFIL automatically switches the Target Device to
-EDL mode and then flash the build image to the device <span id="line-19"
-class="anchor"></span><span id="line-20" class="anchor"></span>
+**NOTE:** QFIL automatically switches the Target Device to
+EDL mode and then flash the build image to the device. 
+-   ![GitHub Logo](/images/qfil8974_7.png)
 
--   ![7.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=7.png "7.png"){.attachment}
-    <span id="line-21" class="anchor"></span><span id="line-22"
-    class="anchor"></span><span id="line-23" class="anchor"></span><span
-    id="line-24" class="anchor"></span>
+## Requirements:
 
-Requirements: {#Requirements:}
--------------
-
-<span id="line-25" class="anchor"></span>
--   Windows PC <span id="line-26" class="anchor"></span><span
-    id="line-27" class="anchor"></span>
--   Target device <span id="line-28" class="anchor"></span><span
-    id="line-29" class="anchor"></span>
--   USB Cable <span id="line-30" class="anchor"></span><span
-    id="line-31" class="anchor"></span>
--   Charged battery or Debug board (if needed, see below...) <span
-    id="line-32" class="anchor"></span><span id="line-33"
-    class="anchor"></span>
+-   Windows PC 
+-   Target device
+-   USB Cable 
+-   Charged battery or Debug board (if needed, see below...)
 -   [Image ready for
-    flashing](http://172.16.7.200/CP/PS/DEVICES/QC_Build_And_Flash){.http}
-    <span id="line-34" class="anchor"></span><span id="line-35"
-    class="anchor"></span>
--   ![{i}](/moin_static194/modernized/img/icon-info.png "{i}"){width="16"
-    height="16"} **Note**: Before flashing image must invoke
-    “update\_common\_info.py” from location: &lt;repository
-    folder&gt;\\common\\build (need to do it only once per image) <span
-    id="line-36" class="anchor"></span><span id="line-37"
-    class="anchor"></span>
+    flashing](http://172.16.7.200/CP/PS/DEVICES/QC_Build_And_Flash)
+-   **Note:** Before flashing image must invoke
+    ''python update\common\info.py' from location: ''repository
+    folder\common\build'' (need to do it only once per image)
 -   QPST software (QFIL is software which integrated in QPST. If don't
-    have, install as described in part "QPST installation") <span
-    id="line-38" class="anchor"></span><span id="line-39"
-    class="anchor"></span>
+    have, install as described in part "QPST installation"
 -   Qualcomm drivers (see part below "Drivers for Qualcomm devices")
-    <span id="line-40" class="anchor"></span><span id="line-41"
-    class="anchor"></span>
 -   [Installed Android
-    SDK](http://developer.android.com/intl/ru/sdk/installing/index.html?pkg=tools){.http}
-    <span id="line-42" class="anchor"></span><span id="line-43"
-    class="anchor"></span>
--   Installed Java from 7 and above (needed for SDK) <span id="line-44"
-    class="anchor"></span><span id="line-45" class="anchor"></span>
--   Installed Python(x,y) <span id="line-46" class="anchor"></span><span
-    id="line-47" class="anchor"></span><span id="line-48"
-    class="anchor"></span><span id="line-49" class="anchor"></span>
+    SDK](http://developer.android.com/intl/ru/sdk/installing/index.html?pkg=tools)
+-   Installed Java from 7 and above (needed for SDK) 
+-   Installed Python(x,y) 
 
-Target Device State {#Target_Device_State}
--------------------
+## Target Device State
 
-<span id="line-50" class="anchor"></span><span id="line-51"
-class="anchor"></span><span id="line-52" class="anchor"></span>
 -   Connect Target device with charged battery by USB cable to Windows
-    PC <span id="line-53" class="anchor"></span><span id="line-54"
-    class="anchor"></span>
-    -   ![usb\_connector.jpg](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=usb_connector.jpg "usb_connector.jpg"){.attachment}
-        <span id="line-55" class="anchor"></span><span id="line-56"
-        class="anchor"></span>
--   Open Device Manager <span id="line-57" class="anchor"></span><span
-    id="line-58" class="anchor"></span>
--   Device Manager should recognize it as: <span id="line-59"
-    class="anchor"></span><span id="line-60" class="anchor"></span><span
-    id="line-61" class="anchor"></span>
+    PC 
+-   ![GitHub Logo](/images/qfil9872_usb_connector.jpg)
+-   Open Device Manager 
+-   Device Manager should recognize it as:
 -   If Target Device is in **EDL mode**, the port information will
-    displayed on Device Manager **Qualcomm HS-USB QDLoader**. <span
-    id="line-62" class="anchor"></span><span id="line-63"
-    class="anchor"></span><span id="line-64" class="anchor"></span>
-
-    -   ![edldevman.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=edldevman.png "edldevman.png"){.attachment}
-        <span id="line-65" class="anchor"></span><span id="line-66"
-        class="anchor"></span><span id="line-67" class="anchor"></span>
+    displayed on Device Manager **Qualcomm HS-USB QDLoader**.    
+-   ![GitHub Logo](/images/qfil8974_edldevman.png)
 -   If Target Device boots up with no issues and the HLOS is running, in
     Device Manager will be called as **Qualcomm HS-USB Diagnostics
-    9025** . <span id="line-68" class="anchor"></span><span id="line-69"
-    class="anchor"></span><span id="line-70" class="anchor"></span>
-
-    -   ![6.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=6.png "6.png"){.attachment}
-        <span id="line-71" class="anchor"></span><span id="line-72"
-        class="anchor"></span>
+    9025**.
+-   ![GitHub Logo](/images/qfil8974_6.png)
 -   When Target Device is connected to the PC and recognized as Device
-    in EDL or diagnostic mode follow to next part "Using QFIL" <span
-    id="line-73" class="anchor"></span><span id="line-74"
-    class="anchor"></span><span id="line-75" class="anchor"></span>
--   ![{i}](/moin_static194/modernized/img/icon-info.png "{i}"){width="16"
-    height="16"} **Note**:If Device Manager does not recognize as
+    in EDL or diagnostic mode follow to next part "Using QFIL"
+-   **Note**:If Device Manager does not recognize as
     described above, please install drivers as described in part
-    "Drivers for Qualcomm devices" <span id="line-76"
-    class="anchor"></span><span id="line-77" class="anchor"></span><span
-    id="line-78" class="anchor"></span><span id="line-79"
-    class="anchor"></span><span id="line-80" class="anchor"></span>
+    "Drivers for Qualcomm devices" 
 
-Using QFIL {#Using_QFIL}
-----------
+ ## Using QFIL 
 
 <span id="line-81" class="anchor"></span><span id="line-82"
 class="anchor"></span><span id="line-83" class="anchor"></span>
 -   Start QFIL <span id="line-84" class="anchor"></span><span
     id="line-85" class="anchor"></span><span id="line-86"
     class="anchor"></span>
--   ![openqfil.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=openqfil.png "openqfil.png"){.attachment}
+-   ![GitHub Logo](/images/qfil8974_openqfil.png)
     <span id="line-87" class="anchor"></span><span id="line-88"
     class="anchor"></span><span id="line-89" class="anchor"></span>
 -   1st step Before using check up version: click **Help** and after
     **about** <span id="line-90" class="anchor"></span><span
     id="line-91" class="anchor"></span><span id="line-92"
     class="anchor"></span>
--   ![15.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=15.png "15.png"){.attachment}
+-   ![GitHub Logo](/images/qfil8974_15.png)
     <span id="line-93" class="anchor"></span><span id="line-94"
     class="anchor"></span><span id="line-95" class="anchor"></span>
 -   Can see the version: <span id="line-96" class="anchor"></span><span
     id="line-97" class="anchor"></span>
--   ![14.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=14.png "14.png"){.attachment}
+-   ![GitHub Logo](/images/qfil8974_14.png)
     <span id="line-98" class="anchor"></span><span id="line-99"
     class="anchor"></span>
 -   If version is less than 2.0.0.5, need to install newer QPST version
@@ -221,11 +106,11 @@ class="anchor"></span><span id="line-83" class="anchor"></span>
     class="anchor"></span><span id="line-109"
     class="anchor"></span><span id="line-110" class="anchor"></span>
 
-    -   ![contents\_xml.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=contents_xml.png "contents_xml.png"){.attachment}
+    -   ![GitHub Logo](/images/qfil8974_contents_xml.png)
         <span id="line-111" class="anchor"></span><span id="line-112"
         class="anchor"></span><span id="line-113"
         class="anchor"></span><span id="line-114" class="anchor"></span>
-    -   ![11.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=11.png "11.png"){.attachment}
+    -   ![GitHub Logo](/images/qfil8974_11.png)
         <span id="line-115" class="anchor"></span><span id="line-116"
         class="anchor"></span><span id="line-117" class="anchor"></span>
 -   Click OK, than finished in Status bar will received notification
@@ -237,7 +122,7 @@ class="anchor"></span><span id="line-83" class="anchor"></span>
     <span id="line-122" class="anchor"></span><span id="line-123"
     class="anchor"></span>
 
-    -   ![selectport.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=selectport.png "selectport.png"){.attachment}
+    -   ![GitHub Logo](/images/qfil8974_selectport.png)
         <span id="line-124" class="anchor"></span><span id="line-125"
         class="anchor"></span>
 -   Choose in **Select Port** needed Target Device, **QFIL** should
@@ -245,7 +130,7 @@ class="anchor"></span><span id="line-83" class="anchor"></span>
     please see red mark in the picture <span id="line-126"
     class="anchor"></span><span id="line-127" class="anchor"></span>
 
-    -   ![12.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=12.png "12.png"){.attachment}
+    -   ![GitHub Logo](/images/qfil8974_12.png)
         <span id="line-128" class="anchor"></span><span id="line-129"
         class="anchor"></span>
 -   ![{i}](/moin_static194/modernized/img/icon-info.png "{i}"){width="16"
@@ -256,7 +141,7 @@ class="anchor"></span><span id="line-83" class="anchor"></span>
     debug board. <span id="line-130" class="anchor"></span><span
     id="line-131" class="anchor"></span>
 
-    -   ![noport.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=noport.png "noport.png"){.attachment}
+    -   ![GitHub Logo](/images/qfil8974_noport.png)
         <span id="line-132" class="anchor"></span><span id="line-133"
         class="anchor"></span>
 -   Select Programmer: Path to &lt;prog\_emmc\_firehose.mbn&gt;
@@ -278,7 +163,7 @@ class="anchor"></span><span id="line-83" class="anchor"></span>
 -   When downloading (flashing) finished, have notification in Status
     bar <span id="line-146" class="anchor"></span><span id="line-147"
     class="anchor"></span><span id="line-148" class="anchor"></span>
-    -   ![13.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=13.png "13.png"){.attachment}
+    -   ![GitHub Logo](/images/qfil8974_13.png)
         <span id="line-149" class="anchor"></span><span id="line-150"
         class="anchor"></span><span id="line-151" class="anchor"></span>
 -   Reboot Device by disconnect of battery, should start Android OS
@@ -382,7 +267,7 @@ class="anchor"></span>
     class="anchor"></span><span id="line-207" class="anchor"></span>
 -   In case you have **QHSUSB\_DLOAD** <span id="line-208"
     class="anchor"></span><span id="line-209" class="anchor"></span>
--   ![1.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=1.png "1.png"){.attachment}
+-   ![GitHub Logo](/images/qfil8974_1.png)
     <span id="line-210" class="anchor"></span><span id="line-211"
     class="anchor"></span>
 -   Install QUD.WIN.1.1 Installer <span id="line-212"
@@ -399,7 +284,7 @@ class="anchor"></span>
 -   In case you have in &lt;Other devices&gt; can see only
     **&lt;Android&gt;**. <span id="line-220" class="anchor"></span><span
     id="line-221" class="anchor"></span>
--   ![2.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=2.png "2.png"){.attachment}
+-   ![GitHub Logo](/images/qfil8974_2.png)
     <span id="line-222" class="anchor"></span><span id="line-223"
     class="anchor"></span>
 -   Install MDP: <span id="line-224" class="anchor"></span><span
@@ -418,7 +303,7 @@ class="anchor"></span>
     id="line-234" class="anchor"></span><span id="line-235"
     class="anchor"></span>
 
-    -   ![3.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=3.png "3.png"){.attachment}
+    -   ![GitHub Logo](/images/qfil8974_3.png)
         <span id="line-236" class="anchor"></span><span id="line-237"
         class="anchor"></span>
 -   Put local path to &lt;Qualcomm USB Drivers\\unziped MDP&gt; <span
@@ -426,7 +311,7 @@ class="anchor"></span>
     class="anchor"></span>
 -   Next, Close. <span id="line-240" class="anchor"></span><span
     id="line-241" class="anchor"></span>
-    -   ![4.png](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=4.png "4.png"){.attachment}
+    -   ![GitHub Logo](/images/qfil8974_4.png)
         <span id="line-242" class="anchor"></span><span id="line-243"
         class="anchor"></span>
 
@@ -451,29 +336,29 @@ class="anchor"></span>
 -   Each device may have different debug board (for example:
     msm8960, msm8974) <span id="line-251" class="anchor"></span><span
     id="line-252" class="anchor"></span>
--   ![8.jpg](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=8.jpg "8.jpg"){.attachment}
+-   ![GitHub Logo](/images/qfil8974_8.jpg)
     <span id="line-253" class="anchor"></span><span id="line-254"
     class="anchor"></span>
 -   Force Target Device to enter EDL mode on the debug board: make DIP
     Switch 3 and 5 ON <span id="line-255" class="anchor"></span><span
     id="line-256" class="anchor"></span>
--   ![9.jpg](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=9.jpg "9.jpg"){.attachment}
+-   ![GitHub Logo](/images/qfil8974_9.jpg)
     <span id="line-257" class="anchor"></span><span id="line-258"
     class="anchor"></span>
 -   Place the device on the debug board with no battery by connecting
     connectors: <span id="line-259" class="anchor"></span><span
     id="line-260" class="anchor"></span>
-    -   ![16.jpg](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=16.jpg "16.jpg"){.attachment}
+    -   ![GitHub Logo](/images/qfil8974_16.jpg)
         <span id="line-261" class="anchor"></span><span id="line-262"
         class="anchor"></span><span id="line-263"
         class="anchor"></span><span id="line-264" class="anchor"></span>
-    -   ![17.jpg](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=17.jpg "17.jpg"){.attachment}
+    -   ![GitHub Logo](/images/qfil8974_17.jpg)
         <span id="line-265" class="anchor"></span><span id="line-266"
         class="anchor"></span><span id="line-267" class="anchor"></span>
 -   Connect the debug board to power power adapter (12V, 5.0A) <span
     id="line-268" class="anchor"></span><span id="line-269"
     class="anchor"></span>
-    -   ![18.jpg](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=18.jpg "18.jpg"){.attachment}
+    -   ![GitHub Logo](/images/qfil8974_18.jpg)
         <span id="line-270" class="anchor"></span><span id="line-271"
         class="anchor"></span>
 -   Connect USB cabel from PC to the device <span id="line-272"
@@ -484,7 +369,7 @@ class="anchor"></span>
     Device from board or on the debug board make DIP Switch 3 to OFF and
     press power on button <span id="line-276"
     class="anchor"></span><span id="line-277" class="anchor"></span>
--   ![10.jpg](/CP/PRODUCTS/HA/KB/Partners/Qualcomm/QFIL%20Flash%20msm8974?action=AttachFile&do=get&target=10.jpg "10.jpg"){.attachment}
+-   ![GitHub Logo](/images/qfil8974_10.jpg)
     <span id="line-278" class="anchor"></span><span id="line-279"
     class="anchor"></span>
 -   The device should start Android OS. <span id="line-280"
