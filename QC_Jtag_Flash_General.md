@@ -5,7 +5,6 @@
 
 ##  Contents
  - Before Starting Please note
- - Download and prepare directory for
  - Download and prepare directory for flashing 
  - Prepare the device to flash
  - Hardware Tools
