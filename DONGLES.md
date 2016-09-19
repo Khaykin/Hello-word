@@ -7,6 +7,7 @@
    - You must have console access to the dongle (Cavium). For example, you can use [Minicom](https://help.ubuntu.com/community/Minicom).
    - You need to know how to connect to the dongle with [u-boot command mode](http://www.stlinux.com/u-boot/using).
    - When using setenv command DO NOT use '='
+   - More info can found in [HDCP End to End testing guide](/ta-DxHDCP/docs/internal/HDCP End to End testing guide.docx)
    
 ## Changing to Test Keys:
 
