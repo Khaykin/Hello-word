@@ -77,7 +77,7 @@ For more information, see <a href="http://172.16.7.200/CP/PRODUCTS/HA/TOOLS/Revi
   - Connect two devices using Wi-Fi direct.
   - Connect two devices using Wi-Fi - one device can be a Wi-Fi hotspot and another device can connect to it. Wi-Fi power saving mode should be turned off. For Qualcomm devices the following values should be changed in `WCNSS_qcom_cfg.ini` as follows: `gEnableBmps=0`, `gEnableImps=0` and `gDot11Mode=3`
     1. This file can be found in the following paths inside device: `/data/misc/wifi/`, `/system/etc/firmware/wlan/qca_cld/` or `/system/etc/wifi/`
-    2. If not set - pull this file, change only this specific values and push back to device.
+    2. If not set - pull this file, change only this specific values and push back to device (possible to do it by [QC_post_burn_script.py](/Scripts/QC_post_burn_script.py) ).
     3. Make sure that when changing this file, file permissions, user and group of this file should be not changed.
     4. When Wi-Fi configuration is finished, make sure that all Wi-Fi configuration dialogs are closed.
  - Prevent device under test from entering sleep or power save mode. For some devices (Qualcomm devices and maybe additional devices) need to touch device screen periodically. For that purpose you may use the following scripts: <a href="Scripts/ScreenOnOff.sh">ScreenOnOff.sh</a> and <a href="Scripts/android_keep_devices_busy.sh">android_keep_devices_busy.sh</a> to simulate this. 
@@ -175,10 +175,27 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${PWD}
 
  ##Debugging HLOS
 
-  - In config file [DxHDCP.cfg]:
-    - `EnableLogs=True` Must be true to get ANY logs in HLOS following to level of set up `DebugLevel=`.
+  - In config file being on DUT /system/etc/DxHDCP.cfg:
+    - `EnableLogs=True` Must be true to get ANY logs in HLOS. 
+    - Following to level of set up `DebugLevel` can be received difference quality of logs:
+    
+    ```
+    #Debug detailing level
+    #if commented \ removed it will use default: full info
+    # 0 - nothing
+    # 3 - critical errors
+    # 5 - critical info
+    # 10 - errors
+    # 30 - warnings
+    # 40 - info
+    # 50 - additional info
+    # 60 - full info
+    ```
+    -  Enable/Disable file system logs. If set to `UseLogFile=False` - file system log will not be used.
+    If set to `UseLogFile=True`- file system log will be used.
     - `LogcatLogs=True` If True, most HLOS printouts will go into logcat. Better to use this because otherwise writing to the *.DxLog file  slows the system
-  - Using debug version is possible, but due to system slowness:
+   - Merge the client logs into logcat `LogcatLogs=True`
+   - Using debug version is possible, but due to system slowness:
     - DxHwLogTrace - These printouts are seen only on debug version
     - DxHwLogError - These printouts are seen on both release & debug versions
   - Viewing DxModule printouts:
@@ -195,15 +212,10 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${PWD}
   ##Debugging TEE
   
   - For enable service logging mechanism in DxHDCP.cfg set up next values to True:
-    - TeeNativeLogging=True
-    - TeeInternalLogging=True
+    - `TeeNativeLogging=True` 
+    - `TeeInternalLogging=True`
   
-  - Viewing entry point address:
-  
-  ```
-  adb -s <device_id> pull /firmware/image/dxhdcp2.mdt
-  readelf -h dxhdcp2.mdt (expected entry point address: 0x88e00000)
-  ```
+
   
   
   
@@ -301,6 +313,180 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${PWD}
   - HDCP production TZ app release version should be provisioned with test keys and tested as a Sink against:
     1. Qualcomm WFD client (HDCP 2.2) with test keys (autentication should pass and picture should be shown on the screen of the source device)
 * The full end to end testing guide is here: <a href="docs/internal/HDCP%20End%20to%20End%20testing%20guide.docx">here</a> 
+
+## HDCP DONGLES
+
+ - **Please note:** 
+   - Here you can find all known commands that changes Dongle's properties.
+   - All changes possible to do **ONLY** to Cavium dongle.
+   - All another Dongles exist in stock now are "Production Devices" and don`t do any changes
+   - You must have console access to the dongle (Cavium). For example, you can use [Minicom](https://help.ubuntu.com/community/Minicom).
+   - You need to know how to connect to the dongle with [u-boot command mode](http://www.stlinux.com/u-boot/using).
+   - When using setenv command DO NOT use '='
+   - More info can found in [HDCP End to End testing guide](/ta-DxHDCP/docs/internal/HDCP End to End testing guide.docx)
+   
+ - **Changing to Test Keys:**
+
+   - `setenv HDCP_FACSIMILE_KEY 1`
+   - `setenv ENABLE_SW_CRYPTO 1`
+   - `saveenv`
+   - `reset`
+   
+ - **Changing to Production Keys:**
+
+   - `setenv HDCP_FACSIMILE_KEY 0`
+   - `setenv ENABLE_SW_CRYPTO 0`
+   - `saveenv`
+   - `reset`
+   
+ - **To keep HDCP socket open after AKE:**
+
+   - `setenv CLOSE_HDCP_SOCKET 0`
+   - `saveenv`
+   - `reset`
+   
+ - **To Change LOGGING level:**
+
+   - `setenv SYSLOG_LEVEL=X`
+   - X = 3 (minimal), 6 (maximum)
+   - `saveenv`
+   - `reset`
+    
+ - **Troubleshoot:**
+
+   - In case the dongle is not working, try to check the following:
+   - if MODE is not WFD in the printenv list do:
+     - `setenv MODE WFD`
+     - `saveenv`
+     - `reset`
+     
+ - **Additional info:**
+
+   - `sete` is short form for `setenv`.
+   
+## Enabling WFD working with HDCP on Qualcomm Devices 
+
+- **Note:** to perform E2E tests on QC devices against 3rd party devices for e.g. Dongles must to enable HDCP in WFD 
+- To enable HDCP in WFD, on qualcomm devices, there are two files in the
+  Qualcomm device that needs to be modified:
+   -  In the device, under the path `/system/etc/wfdconfig.xml` there is a
+    tag inside Capabilities that is called `ContentProtection`.
+    -   It has a parameter **`Valid`** ( on some platforms it is called
+        **`HDCPValid`**). It should be set to 1. 
+    -   Another parameter called `EncryptAudio` should be set to '1'
+        in case Audio should be encrypted. 
+    -   Then push the updated `wfdconfig.xml` into `/system/etc` 
+- **Note:** For MSM8994 and newest devices exist capability to be a Sink in this case needs to be modified `wfdsinkconfig.xml`
+-  Rebuilding WFD module to work and link with DxHdcp library:
+    -   in the Qcom source tree root: 
+    ```
+    mkdir -p vendor/qcom/proprietary/wfd-noship/mm/hdcp/HDCP_API 
+    gedit vendor/qcom/proprietary/wfd-noship/Android.mk
+    gedit vendor/qcom/proprietary/wfd-noship/mm/ 
+    ```
+    -That will have the following: 
+    
+    ```
+    ifeq ($(call is-vendor-board-platform,QCOM),true)
+    ifneq ($(call is-board-platform,copper),true)
+    include $(call all-subdir-makefiles)
+    endif
+     endif # TARGET_USES_WFD
+    ```
+    - Copy `libDxHdcp.so` to `vendor/qcom/proprietary/wfd-noship/mm/hdcp/`
+    it is needed for linking the wfd library 
+    - Copy the DxHdcp header files to `vendor/qcom/proprietary/wfd-noship/mm/hdcp/HDCP_API`
+    - **Android L and above**        
+    ```
+    gedit vendor/qcom/proprietary/wfd-noship/mm/hdcp/Android.mk 
+    ```
+    -  With the following values:
+    
+    ```
+    LOCAL_PATH := $(call my-dir)
+    include $(CLEAR_VARS)
+    LOCAL_SRC_FILES := libDxHdcp.so
+    LOCAL_MODULE := libDxHdcp
+    LOCAL_MODULE_SUFFIX := .so
+    LOCAL_MODULE_TAGS := optional
+    LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+    LOCAL_MULTILIB := 32
+    include $(BUILD_PREBUILT)
+    ```
+    - Build the HDCP prebuilt module:
+
+    ```
+    pushd vendor/qcom/proprietary/wfd-noship/mm/hdcp/
+    mm -B
+    popd
+    ```
+    
+    - **Note:** To make sure that the library has been built properly, you can add a warning in the source file:
+    `vendor/qcom/proprietary/wfd/mm/hdcp/common/src/**WFD_HdcpCP.cpp**`
+ 
+    - Look up `CWFD_HdcpCp::WFD_HdcpSessionInit` and add a warning inside `#ifdef WFD_HDCP_ENABLED`.For example:
+    ``` 
+    #ifdef WFD_HDCP_ENABLED
+    ...
+    #warning WFD_HdcpSessionInit - HDCP ENABLED
+    #else
+    #warning WFD_HdcpSessionInit - HDCP DISABLED
+    #endif //WFD_HDCP_ENABLED
+    ```
+   - **Note:** If COMPILE_HDCP_LIB will not set to true automaticlly as usual, 
+   that's the root cause in this case and happend for all 8996 projects.
+   - Fix: add COMPILE_HDCP_LIB :=true manually.
+   ```
+    COMPILE_HDCP_LIB := false
+    WFD_NOSHIP_HDCP_PATH  := $(LOCAL_PATH)/../../../../wfd-noship/mm/hdcp
+    WFD_INTERNAL_LIB_PATH := $(TOP)/vendor/qcom/proprietary/wfd-internal/mm/hdcp/lib
+    COMPILE_HDCP_LIB := $(shell if [[ -d $(WFD_NOSHIP_HDCP_PATH) && -d $(WFD_INTERNAL_LIB_PATH) ]] ; then echo true; fi)
+    COMPILE_HDCP_LIB :=true
+    ```
+   - **Rebuild** libwfdhdcpcp:
+    ```
+    pushd vendor/qcom/proprietary/wfd/mm/hdcp/
+    mm -B
+    popd
+    ```
+    
+    - **Note:** If `mm` fails due to missing dependencies,
+    then try `mma` instead. 
+    -   push libwfdhdcpcp that was built from
+    `<Qcom source tree root>/out/target/product/<product name>/system/vendor/lib/libwfdhdcpcp.so`
+    to `/system/lib` in the device ( on newer builds, the path is `/system/vendor/lib/`) 
+    - push libwfdhdcpcp that was built from
+    `<Qcom source tree root>/out/target/product/<product name>/system/vendor/lib64/libwfdhdcpcp.so`
+    to `/system/lib64` in the device ( on newer builds, the path is `/system/vendor/lib64/`)
+    - **Before Android L**
+
+    ```
+    gedit vendor/qcom/proprietary/wfd-noship/mm/hdcp/Android.mk 
+    ```
+    - with the following:
+    ```
+    LOCAL_PATH := $(call my-dir)
+    include $(CLEAR_VARS)
+    LOCAL_SRC_FILES := libDxHdcp.so
+    LOCAL_MODULE := libDxHdcp
+    LOCAL_MODULE_SUFFIX := .so
+    LOCAL_MODULE_TAGS := optional
+    LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+    include $(BUILD_PREBUILT)
+    ```
+    - in case the tree or libwfdhdcpcp was already built, clean libwfdhdcpcp from `<Qcom source tree root>`:
+    ```
+     make clean-libwfdhdcpcp
+     make libwfdhdcpcp
+    ``` 
+    - push libwfdhdcpcp that was built from
+    `<Qcom source tree root>\out\target\product\<product name>\system\lib\libwfdhdcpcp.so`
+    to `/system/lib` in the device ( on newer builds, the path is `/system/vendor/lib/`) 
+
+   - Now WFD can use HDCP on QCom device. 
+   - QCom devellopment device can be used for [E2E tests](/ta-DxHDCP/blob/master/docs/internal/HDCP%20End%20to%20End%20testing%20guide.docx) with the wfd_client application, connected to
+   a DONGLE using test certificates.
+   
 * When release is tested
   - The test summary PDF should be created and added to the external BB test package.
   - Status of the release into release server is changed to “Tested”.
