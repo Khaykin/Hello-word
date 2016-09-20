@@ -25,13 +25,13 @@ Git working procedure is described
 ##Code review
 Code review is mandatory for each commit to the MDB, Long term branch or Release branch (see Git working procedure above).
 Code review should be done using: <a href="http://reviewboard.discretix.com/">review board server</a>.
-For more information, see <a href="http://172.16.7.200/CP/PRODUCTS/HA/TOOLS/ReviewBoard/">review board wiki page</a>.
+For more information, see [review board wiki page](/master/docs/internal/ReviewBoard)
 
 ##Documentation
 * Documentaiton is stored into <a href="docs/">github repository docs folder</a> or into <a href="http://teamsites.arm.com/sites/IOTBU/Engineering/EngineeringGroupGrinbergDmitry">SharePoint server</a>. An instructions how to use SharePoint is <a href="http://teamsites.arm.com/sites/spsupport/SitePages/Home.aspx">here</a>
 * Design documents can be found <a href="docs/internal/Design/">here</a>
 * An explanation (by <a href="http://www.digital-cp.com/">DCP</a>) of compatibility issues related to HDCP repeaters with zero device count is <a href="docs/internal/plugfest042005.pdf">here</a>
-* HDCP over Qualcomm platform running Windows Phone is done into <a href="https://github.com/ARMmbed/ta-DxHDCP/tree/DxHDCP_for_Windows_Threshold">Windows Phone branch</a>. The relevant wiki page is <a href="http://172.16.7.200/CP/PRODUCTS/HA/KB/HDCP_WinTH_Guide">here</a>.
+* HDCP over Qualcomm platform running Windows Phone is done into <a href="https://github.com/ARMmbed/ta-DxHDCP/tree/DxHDCP_for_Windows_Threshold">Windows Phone branch</a>. The relevant wiki page is [here](/master/docs/internal/HDCP_WinTH_Guide.md)
 * Design document for White Box tests is <a href="docs/internal/Design/HDCP_WB_redesign.docx">here</a>. Note: Currently this tests package is used only into <a href="https://github.com/ARMmbed/ta-DxHDCP/tree/DxHDCP_for_Windows_Threshold">Windows Phone branch</a>.  
 * High level test plan is <a href="docs/internal/HDCP%20high%20level%20test%20plan.docx">here</a>.
 * Recorded lectures are saved under `\\qnap\shared\Lectures\HDCP`
@@ -139,10 +139,51 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${PWD}
                                                 # instead of 127.0.0.1 an IP address of Source machine
                                                 # should be used
 ```
+
+## Provisioning
+
+**Step 1:** PC tool (dx**hdcp**prov.exe) installation 
+ - If the DxHdcpProvisioning tool is not installed on your machine, you need to:
+    - In Visual Studio open the solution from /master/HDCP/tools/dxhdcpprov/dxhdcpprov.sln and build
+    - Run from /master/HDCP/tools/Setup/Release/setup.exe
+
+ -  This will install dxhdcpprov.exe and copy 2 dll files (ProvisioningTool.dll and QAT_CryptoEngine2.dll) 
+   to C:\Program    Files\Discretix\DxHdcpProvisioning
+
+**Step 2:** Use the PC tool to encrypt secret data 
+
+-  Run->cmd
+-  cd C:\Program Files\Discretix\DxHdcpProvisioning\
+-  Run commmands:
+-  For Tx: `dxhdcpprov -v -tx -hdcp2_data_file Tx_HDCP2_OrderNo_1_Data.bin -cek HDCP2_Cek.dat -oemid HDCP2_OemId.dat -o PM_Tx.out`
+-  For Rx: `dxhdcpprov -v -rx -hdcp2_data_file Rx_HDCP2_OrderNo_1_Data.bin -cek HDCP2_Cek.dat -oemid HDCP2_OemId.dat -o PM_Rx.out`
+-  **Note:** bin and dat files can be taken from [ProvisioningTestFiles](/master/HDCP/tools/ProvisioningTestFiles)
+-  This will generate PM_Rx.out / PM_Tx.out files which are the encrypted data package files to use in step 2
+
+**Step 2:** Use the encrypted data package + CEK to provision the device
+
+-  In this step we provision the device, which means we decrypt the encrypted data package using CEK, 
+   and store the secrest on the  device's SFS.
+-  There are 2 alternative options for this step:
+    - Use DxProvTst tool:
+      - When building the HDCP project, DxProvTst will be generated under /HDCP/libs/armeabi/
+      - Push the below to the device (all to the same directory, doesn't matter which one):
+         * DxProvTst
+         * CEK file used in previous steps
+         * PM.out file used in previous steps
+         * Rename the CEK and PM file to match the hardcoded names under /HDCP/DxHDCP_Tst/DxHDCP_Provisioning_Tst/DxHdcp_Provisioning_Tst.c
+      - Execute ./DxProvTst on the device
+-  Provisioning should be complete successfully, and /persist/data/dxhdcp2/ or /persist/data/sfs/ 
+   directory should be created and filled in with data
+-  Tool source code under: /master/HDCP/DxHDCP_Tst/DxHDCP_Provisioning_Tst
+    - Use the QA_TEST_APP(BBox):
+      - When running the test, use [1] - [Provisioning Settings] to provision the device as Transmitter
+      - When running the test, use [8] - [Settings] to provision the device as Receiver
+   
 ##HDCP traffic analysis
 * In order to debug HDCP stack with HDCP tests or end to end tests against 3rd party equipment, it is possible to record HDCP traffic using `tcpdump` utility and analyze recorded traffic using <a href="https://www.wireshark.org/">Wireshark</a> application:
   - Wireshark can be installed on both: Linux and Windows PC. It is recommended to install and use it on Windows PC.
-  - After Wireshark installation, HDCP2 trafic analysis should be enabled by entering: `Analyze`->`Enabled Protocols...` menu and checking options `HDCP2` and `hdcp2_tcp` as described below: ![GitHub Logo](docs/images/WireSharkCfg1.jpg)
+  - After Wireshark installation, [HDCP2 trafic analysis](https://wiki.wireshark.org/HDCP2) should be enabled by entering: `Analyze`->`Enabled Protocols...` menu and checking options `HDCP2` and `hdcp2_tcp` as described below: ![GitHub Logo](docs/images/WireSharkCfg1.jpg)
 * `tcpdump` utility can be used on HDCP Sink device, HDCP Source device or on both devices
 * Root permissions is required in order to use `tcpdump` utility
 * For Linux Ubuntu PCs, `tcpdump` utility should be installed by `apt-get install tcpdump` command
@@ -212,11 +253,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${PWD}
   ##Debugging TEE
   
   - For enable service logging mechanism in DxHDCP.cfg set up next values to True:
-    - `TeeNativeLogging=True` 
-    - `TeeInternalLogging=True`
-  
-
-  
+    - Allow TEE service logging mechanism (platform independent): `TeeNativeLogging=True` 
+    - Route TEE logging mechanism to HLOS logging mechanism (platform independent): `TeeInternalLogging=True` 
   
   
 ##HDCP release versions
@@ -273,7 +311,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${PWD}
     8. `DX_VOS_Errors.h`
     9. `DxTypes.h`
   - HDCP configuration file (<a href="HDCP/external/HDCP_API">HDCP/external/HDCP_API</a> folder includes several configuration files. Build package scripts includes right configuration file to the release package)
-  - Relevant license files for open source code that used by HDCP including TZInfra and other external libraries. Licence files related to TZInfra library can be found <a href="licenses">here</a>. If new open source code will be used as part of the HDCP code, the relevant license files should be added.
+  - Relevant license files for open source code that used by HDCP including TZInfra and other external libraries. Licence files related to TZInfra library can be found <a href="/HDCP/licenses">here</a>. If new open source code will be used as part of the HDCP code, the relevant license files should be added.
   - PC provisioning application installer
   - Provisioning sample app and test source files: dxhdcpprov.cpp and DxHdcp_Provisioning_Tst.c
   - Facsimile provisioning binary files for sink (both: HDCP 2.1 and HDCP 2.2 variants)
