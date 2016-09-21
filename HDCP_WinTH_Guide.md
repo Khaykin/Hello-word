@@ -1,11 +1,11 @@
 #HDCP_WinTH_Guide
 
 ##Contents:
-- [HDCP on Windows Threshold (Windows 10)](#hdcp-on-windows-threshold-(windows-10))
+- [HDCP on Windows Threshold-Windows 10](#hdcp-on-windows-threshold-windows-10)
 - [Development Environment Prerequisite](#development-environment-prerequisite)
 - [Supported platforms](#supported-platforms)
 - [Building the project](#building-the-project)
-- [Git information](#git information)
+- [Git information](#git-information)
 - [Environment](#environment)
 - [Build steps](#build steps)
 - [Test setup deployment](#test-setup-deployment)
@@ -19,7 +19,7 @@
 - [HDCP Logging](#hdcp-logging)
 - [Packaging](#packaging)
 
-## HDCP on Windows Threshold (Windows 10)
+## HDCP on Windows Threshold-Windows 10
 
  - This page describes how to build a testing setup for HDCP on Windows 10 platforms. 
 
