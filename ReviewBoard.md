@@ -1,15 +1,13 @@
 # ReviewBoard
 
-##Contents
+##Contents:
+- [ReviewBoard](#reviewboard)
+- [Installing RB tools](#installing-rb-tools)
+- [Windows Command line setup](#windows-command-line-setup)
+- [Linux Command line setup](#linux-command-line-setup)
+- [Troubleshooting](#troubleshooting) 
 
-```
-- ReviewBoard
-- Installing RB tools
-- Windows Command line setup
-- Linux/OSX Command line setup
-- Troubleshooting
-```
-
+## ReviewBoard
 - Review Board is a tool for reviewing source code, documentation and
   other text-based files. It offers a powerful web-based interface with
   broad browser support for managing review requests and reviewing code,
@@ -78,7 +76,7 @@ post"](http://www.reviewboard.org/docs/rbtools/) documentation.
     -   reboot 
     -   There are many alternative ways to get diff for windows - whatever works
 
-## Linux/OSX Command line setup 
+## Linux Command line setup 
 
  - Uninstall system pip if installed: `sudo apt-get purge python-pip`
  - Install pip: `curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | sudo python`
