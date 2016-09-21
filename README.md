@@ -25,7 +25,7 @@ Git working procedure is described
 ##Code review
 Code review is mandatory for each commit to the MDB, Long term branch or Release branch (see Git working procedure above).
 Code review should be done using: <a href="http://reviewboard.discretix.com/">review board server</a>.
-For more information, see [review board wiki page](/master/docs/internal/ReviewBoard)
+For more information, see [review board wiki page](/master/docs/internal/ReviewBoard.md)
 
 ##Documentation
 * Documentaiton is stored into <a href="docs/">github repository docs folder</a> or into <a href="http://teamsites.arm.com/sites/IOTBU/Engineering/EngineeringGroupGrinbergDmitry">SharePoint server</a>. An instructions how to use SharePoint is <a href="http://teamsites.arm.com/sites/spsupport/SitePages/Home.aspx">here</a>
