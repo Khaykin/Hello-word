@@ -7,17 +7,17 @@
 - [Building the project](#building-the-project)
 - [Git information](#git information)
 - [Environment](#environment)
-- [Build steps]
-- [Test setup deployment]
-- [Provisioning]
-- [Using QC Tool]
-    - Using the Internal Utility
-  Running internal tests
-    - SW Receiver set-up
-    - Device transmitter set-up
-  - Running End-2-End tests
-  - HDCP Logging
-  - Packaging
+- [Build steps](#build steps)
+- [Test setup deployment](#test-setup-deployment)
+- [Provisioning](#provisioning)
+- [Using QC Tool](#using-qc-tool)
+- [Using the Internal Utility](#using-the-internal-utility)
+- [Running internal tests](#running-internal-tests)
+- [SW Receiver set-up](#sw-receiver-set-up)
+- [Device transmitter set-up](#device-transmitter-set-up)
+- [Running End-2-End tests](#running-end-2-end-tests)
+- [HDCP Logging](#hdcp-logging)
+- [Packaging](#packaging)
 
 ## HDCP on Windows Threshold (Windows 10)
 
@@ -294,7 +294,7 @@ Page](https://github.com/ARMmbed/ta-TZInfra/blob/master/docs/windows-threshold/R
 - **Note:** msm8996 devices using QC release 01700.1a must use the internal
   provisioning utility due to bugs in the QC tool in the release.
 
-## Using QC Tool {#Using_QC_Tool}
+## Using QC Tool 
 
 - The official way to provision a QC WindowsPhone device is to use the QC tool **QCPhoneProvTool**.
 - Here the CEK & data are stored into a special partition (DPP) and at the
