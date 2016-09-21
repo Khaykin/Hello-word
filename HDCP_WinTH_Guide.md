@@ -5,7 +5,7 @@ Contents:
   - Development Environment
   - Prerequisite
   - Supported platforms
-  - Building the project
+  - [Building the project](building-the-project)
     - Git information
     - Environment
     - Build steps
