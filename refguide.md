@@ -1,42 +1,4 @@
-<div id="header">
 
-<div>
-
-Search:
-
-</div>
-
-<div id="logo">
-
-[![MoinMoin Logo](/moin_static194/common/moinmoin.png)](/FrontPage)
-
-</div>
-
-<span id="pagelocation"><span class="pagepath">[CP](/CP)<span class="sep">/</span>[PRODUCTS](/CP/PRODUCTS)<span class="sep">/</span>[HA](/CP/PRODUCTS/HA)<span class="sep">/</span>[KB](/CP/PRODUCTS/HA/KB){.nonexistent}</span><span class="sep">/</span>[HDCP\_Ref\_Guide](/CP/PRODUCTS/HA/KB/HDCP_Ref_Guide?action=fullsearch&value=linkto%3A%22CP%2FPRODUCTS%2FHA%2FKB%2FHDCP_Ref_Guide%22&context=180 "Click to do a full-text search for this title"){.backlink}</span> {#locationline}
-=============================================================================================================================================================================================================================================================================================================================================================================================================================================================================
-
--   [RecentChanges](/RecentChanges)
--   [FindPage](/FindPage)
--   [HelpContents](/HelpContents)
--   [HDCP\_Ref\_Guide](/CP/PRODUCTS/HA/KB/HDCP_Ref_Guide)
-
-<div id="pageline">
-
-------------------------------------------------------------------------
-
-</div>
-
-</div>
-
-<div id="page" lang="en" dir="ltr">
-
-<div id="content" dir="ltr" lang="en">
-
-<span id="top" class="anchor"></span> <span id="line-1"
-class="anchor"></span>
-
-**HDCP** - Quick Reference Guide {#HDCP_-_Quick_Reference_Guide}
-================================
 
 <span id="line-2" class="anchor"></span>
 **![{\*}](/moin_static194/modernized/img/star_on.png "{*}"){width="16"
@@ -136,92 +98,46 @@ class="anchor"></span>
 
     #make TZ_PLAT_PATH=$TZ_PLATFORMS_ROOT/Qualcomm PLAT_VER=2330 PLAT=MSM8960Qsee clean
 
-<span id="line-51" class="anchor"></span>
-**![{\*}](/moin_static194/modernized/img/star_on.png "{*}"){width="16"
-height="16"}** **<span class="u">Provisioning</span>** <span
-id="line-52" class="anchor"></span><span id="line-53"
-class="anchor"></span>
+## Provisioning
 
-**Step 0:** PC tool (dx**hdcp**prov.exe) installation <span id="line-54"
-class="anchor"></span><span id="line-55" class="anchor"></span>
+**Step 1:** PC tool (dx**hdcp**prov.exe) installation 
+ - If the DxHdcpProvisioning tool is not installed on your machine, you need to:
+    - In Visual Studio, build the solution dxhdcpprov.sln under /master/HDCP/tools/dxhdcpprov
+    - Run setup.exe under /master/HDCP/tools/Setup/Release
+ -  This will install dxhdcpprov.exe and copy 2 dll files (ProvisioningTool.dll and QAT_CryptoEngine2.dll) 
+   to C:\Program    Files\Discretix\DxHdcpProvisioning
 
-<span id="line-56" class="anchor"></span><span id="line-57"
-class="anchor"></span><span id="line-58" class="anchor"></span><span
-id="line-59" class="anchor"></span><span id="line-60"
-class="anchor"></span><span id="line-61" class="anchor"></span>
+**Step 2:** Use the PC tool to encrypt secret data 
 
-    If the DxHdcpProvisioning tool is not installed on your machine, you need to:
-    - In Visual Studio, build the solution [dxhdcpprov.sln] under $(HDCP_Trunk_MainProject)\tools\dxhdcpprov
-    - Run setup.exe under $(HDCP_Trunk_MainProject)\tools\Setup\Release
+-  Run->cmd
+-  cd C:\Program Files\Discretix\DxHdcpProvisioning\
+-  Execute commmands:
+-  For Tx: `dxhdcpprov -v -tx -hdcp2_data_file Tx_HDCP2_OrderNo_1_Data.bin -cek HDCP2_Cek.dat -oemid HDCP2_OemId.dat -o PM_Tx.out`
+-  For Rx: `dxhdcpprov -v -rx -hdcp2_data_file Rx_HDCP2_OrderNo_1_Data.bin -cek HDCP2_Cek.dat -oemid HDCP2_OemId.dat -o PM_Rx.out`
+-  **Note:** bin and dat files can be taken from [ProvisioningTestFiles](/master/HDCP/tools/ProvisioningTestFiles)
+-  This will generate PM_Rx.out / PM_Tx.out files which are the encrypted data package files to use in step 2
 
-    ==> This will install dxhdcpprov.exe and copy 2 dll files (ProvisioningTool.dll and QAT_CryptoEngine2.dll) to C:\Program Files\Discretix\DxHdcpProvisioning
-
-<span id="line-62" class="anchor"></span>
-**Step 1:** Use the PC tool to encrypt secret data <span id="line-63"
-class="anchor"></span><span id="line-64" class="anchor"></span>
-
-<span id="line-65" class="anchor"></span><span id="line-66"
-class="anchor"></span><span id="line-67" class="anchor"></span><span
-id="line-68" class="anchor"></span><span id="line-69"
-class="anchor"></span><span id="line-70" class="anchor"></span><span
-id="line-71" class="anchor"></span><span id="line-72"
-class="anchor"></span><span id="line-73" class="anchor"></span><span
-id="line-74" class="anchor"></span><span id="line-75"
-class="anchor"></span><span id="line-76" class="anchor"></span><span
-id="line-77" class="anchor"></span><span id="line-78"
-class="anchor"></span>
-
-    Run->cmd
-
-    cd C:\Program Files\Discretix\DxHdcpProvisioning\
-
-    Run commmands:
-
-    For Tx: dxhdcpprov -v -tx -hdcp2_data_file Tx_HDCP2_OrderNo_1_Data.bin -cek HDCP2_Cek.dat -oemid HDCP2_OemId.dat -o PM_Tx.out
-
-    For Rx: dxhdcpprov -v -rx -hdcp2_data_file Rx_HDCP2_OrderNo_1_Data.bin -cek HDCP2_Cek.dat -oemid HDCP2_OemId.dat -o PM_Rx.out
-
-    Note: bin and dat files can be taken from $(HDCP_Trunk_MainProject)\tools\ProvisioningTestFiles
-
-    ==> This will generate PM_Rx.out / PM_Tx.out files which are the encrypted data package files to use in step 2
-
-<span id="line-79" class="anchor"></span>
 **Step 2:** Use the encrypted data package + CEK to provision the device
-<span id="line-80" class="anchor"></span><span id="line-81"
-class="anchor"></span>
 
-<span id="line-82" class="anchor"></span><span id="line-83"
-class="anchor"></span><span id="line-84" class="anchor"></span><span
-id="line-85" class="anchor"></span><span id="line-86"
-class="anchor"></span><span id="line-87" class="anchor"></span><span
-id="line-88" class="anchor"></span><span id="line-89"
-class="anchor"></span><span id="line-90" class="anchor"></span><span
-id="line-91" class="anchor"></span><span id="line-92"
-class="anchor"></span><span id="line-93" class="anchor"></span><span
-id="line-94" class="anchor"></span><span id="line-95"
-class="anchor"></span><span id="line-96" class="anchor"></span><span
-id="line-97" class="anchor"></span><span id="line-98"
-class="anchor"></span><span id="line-99" class="anchor"></span><span
-id="line-100" class="anchor"></span>
+-  In this step we provision the device, which means we decrypt the encrypted data package using CEK, 
+   and store the secrest on the  device's SFS.
+-  There are 2 alternative options for this step:
+    - Use DxProvTst tool:
+      - When building the HDCP project, DxProvTst will be generated under /HDCP/libs/armeabi/
+    - Push the below to the device (all to the same directory, doesn't matter which one):
+      * DxProvTst
+      * CEK file used in previous steps
+      * PM.out file used in previous steps
+      * Rename the CEK and PM file to match the hardcoded names under /HDCP/DxHDCP_Tst/DxHDCP_Provisioning_Tst/DxHdcp_Provisioning_Tst.c
+    - Execute ./DxProvTst on the device
+-  Provisioning should be complete successfully, and /persist/data/dxhdcp2/ or /persist/data/sfs/ 
+   directory should be created and filled in with data
+-  Note: Tool source code under: /master/HDCP/DxHDCP_Tst/DxHDCP_Provisioning_Tst
+    - Use the QA_TEST_APP(BBox):
+      - When running the test, use [1] - [Provisioning Settings] to provision the device as Transmitter
+      - When running the test, use [8] - [Settings] to provision the device as Receiver
 
-    In this step we provision the device, which means we decrypt the encrypted data package using CEK, and store the secrest on the device's SFS.
 
-    There are 2 alternative options for this step:
-
-    1. Use DxProvTst tool:
-    - When building the HDCP project, DxProvTst will be generated under $(HDCP_Trunk_MainProject)/libs/armeabi/
-    - Push the below to the device [all to the same directory, doesn't matter which one]:
-     * DxProvTst
-     * CEK file used in previous steps
-     * PM.out file used in previous steps
-    - Rename the CEK and PM file to match the hardcoded names under $(HDCP_Trunk_MainProject)/DxHDCP_Tst/DxHDCP_Provisioning_Tst/DxHdcp_Provisioning_Tst.c
-    - Run ./DxProvTst on the device
-
-    ==> Provisioning should be complete successfully, and /persist/data/dxhdcp2/ directory should be created and filled in with data
-
-    Note: Tool source code under: $(HDCP_Trunk_MainProject)/DxHDCP_Tst/DxHDCP_Provisioning_Tst
-
-    2. Use the QA_TEST_APP: When running the test, use [A] - [Provisioning Settings] to provision the device
 
 <span id="line-101" class="anchor"></span>
 **![{\*}](/moin_static194/modernized/img/star_on.png "{*}"){width="16"
