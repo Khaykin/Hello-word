@@ -22,7 +22,7 @@ Contents:
 
 ## HDCP on Windows Threshold (Windows 10)
 
- - This page describes how to build a testing setup for HDCP on Windows 10 platforms. id="line-6"
+ - This page describes how to build a testing setup for HDCP on Windows 10 platforms. 
 
 ## Development Environment Prerequisite
 
@@ -38,9 +38,9 @@ Supported platforms
 
 ## Building the project
 
-### Git information {#Git_information}
+### Git information 
 
-- [**DxHDCP_for_Windows_Threshold** branch](https://github.com/ARMmbed/ta-DxHDCP/tree/DxHDCP_for_Windows_Threshold)
+ - Еmplacement of branch for DxHDCP_for_Windows_Threshold is on [Github](https://github.com/ARMmbed/ta-DxHDCP/tree/DxHDCP_for_Windows_Threshold).
    
 ### Environment
 
@@ -153,17 +153,17 @@ Supported platforms
 
 
 ```
-  Y:\CP\HWA\WindowsThreshold\Qualcomm\Burn_and_config_Tools>ffutool -massStorage
+  \\qnap\shared\CP\HWA\WindowsThreshold\Qualcomm\Burn_and_config_Tools>ffutool -massStorage
   Success, device resetting to mass storage mode.
 
-  Y:\CP\HWA\WindowsThreshold\Qualcomm\Burn_and_config_Tools>"tzapps partition\find_tzapps_partition.bat"
+  \\qnap\shared\CP\HWA\WindowsThreshold\Qualcomm\Burn_and_config_Tools>"tzapps partition\find_tzapps_partition.bat"
   Found TZAPPS in \\?\harddisk1partition24\\tzapps\
 
  REM Copy the .mbn file as dxhdcp2.mbn to the folder found in previous step.
- Y:\CP\HWA\WindowsThreshold\Qualcomm\Burn_and_config_Tools>copy "C:\tmp\__build\dxhdcp2-release-Tst-msm8994-wp-1-0-1073.1.mbn" \\?\harddisk1partition24\\tzapps\dxhdcp2.mbn
+ \\qnap\shared\CP\HWA\WindowsThreshold\Qualcomm\Burn_and_config_Tools>copy "C:\tmp\__build\dxhdcp2-release-Tst-msm8994-wp-1-0-1073.1.mbn" \\?\harddisk1partition24\\tzapps\dxhdcp2.mbn
  1 file(s) copied.
 
-  Y:\CP\HWA\WindowsThreshold\Qualcomm\Burn_and_config_Tools>dir \\?\harddisk1partition24\\tzapps
+  \\qnap\shared\CP\HWA\WindowsThreshold\Qualcomm\Burn_and_config_Tools>dir \\?\harddisk1partition24\\tzapps
   Volume in drive \\?\harddisk1partition24 has no label.
   Volume Serial Number is 3046-D4D7
 
