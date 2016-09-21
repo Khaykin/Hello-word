@@ -1,17 +1,16 @@
 #HDCP_WinTH_Guide
 
-Contents:
-- [HDCP on Windows Threshold (Windows 10)](https://github.com/Khaykin/Hello-word/blob/master/HDCP_WinTH_Guide.md#hdcp-on-windows-threshold-windows-10)
-  - Development Environment
-  - Prerequisite
-  - Supported platforms
-  - [Building the project](building-the-project)
-    - Git information
-    - Environment
-    - Build steps
-  - Test setup deployment
-  - Provisioning
-    - Using QC Tool
+##Contents:
+- [HDCP on Windows Threshold (Windows 10)](#hdcp-on-windows-threshold-(windows-10))
+- [Development Environment Prerequisite](#development-environment-prerequisite)
+- [Supported platforms](#supported-platforms)
+- [Building the project](#building-the-project)
+- [Git information](#git information)
+- [Environment](#environment)
+- [Build steps]
+- [Test setup deployment]
+- [Provisioning]
+- [Using QC Tool]
     - Using the Internal Utility
   Running internal tests
     - SW Receiver set-up
@@ -31,7 +30,7 @@ Check List** and **Windows 10 Toolchain Setup** parts in [Windows
 Threshold
 Page](https://github.com/ARMmbed/ta-TZInfra/blob/master/docs/windows-threshold/README.md)
 
-Supported platforms
+##Supported platforms
 
 - Qualcomm's msm8994 
 - Qualcomm's msm8996
