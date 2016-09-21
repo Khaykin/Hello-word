@@ -49,7 +49,7 @@ Page](https://github.com/ARMmbed/ta-TZInfra/blob/master/docs/windows-threshold/R
 - Checkout the **DxHDCP_for_Windows_Threshold** branch.
 - Generate the HDCP project files 
   -  Open cmd 
-  - cd to <HDCP_ROOT>
+  - cd to `<HDCP_ROOT>`
   - To generate project files run:
   - **msm8994 (Visual Studio 2013)**
 
@@ -69,7 +69,7 @@ Page](https://github.com/ARMmbed/ta-TZInfra/blob/master/docs/windows-threshold/R
    release should be used and set the
    **PLAT_QUALCOMM_WA_QC_RELEASE** flag accordingally.
  - For example: **--PLAT_QUALCOMM_WA_QC_RELEASE=42000.1**
- - You now have an updated Visual Studio solution file `DxHDCP_<2013/2015>.sln` under `<HDCP_ROOT>_build_vs<2013/2015>` and a shortcut   to it under <HDCP_ROOT>
+ - You now have an updated Visual Studio solution file `DxHDCP_<2013/2015>.sln` under `<HDCP_ROOT>_build_vs<2013/2015>` and a shortcut   to it under `<HDCP_ROOT>`
 
 ### Build steps 
 
@@ -383,7 +383,7 @@ Provisioning encrypted HDCP CEK to DPP...
   installer which is built when compiling HDCP for SW_Win32
  - * Build a Win32 SW solution 
    -  Open cmd
-   -  cd to <HDCP_ROOT>
+   -  cd to `<HDCP_ROOT>`
    -  Generate project files for SW_Win32 by running `python project_builder.py -p SW_Win32_VS2015 config generate`
    -  Open Visual Studio 2015. 
    -  In the **Solution Platforms** dropdown choose **SW_Win32**
