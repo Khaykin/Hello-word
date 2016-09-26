@@ -54,5 +54,5 @@ echo 'HDCP buil finished'
 
 node {
     stage 'Stage 5'
-    mail bcc: '', body: 'build HDCP finished !!!', cc: '', from: '', replyTo: '', subject: 'DECKIY CEREBRALNY POSTROEN', to: 'igor.haykin@sansasecurity.com'
+    mail bcc: '', body: 'build HDCP finished for MSM8996_LA2.0 -v 01450.1 !!!', cc: '', from: '', replyTo: '', subject: 'HDCP master builded', to: 'igor.haykin@sansasecurity.com'
 }
