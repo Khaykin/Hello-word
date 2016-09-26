@@ -14,6 +14,7 @@ node{
     stage 'Stage 2'
     gitClean()
     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '1', url: 'git@github.com:ARMmbed/ta-DxHDCP.git']]])
+    echo 'git cleaned'
 }
 /**
  * Clean a Git project workspace.
@@ -49,9 +50,9 @@ echo 'build'
 node {
     sh './Scripts/build_hdcp_and_tests.py -p Qualcomm -m MSM8996_LA2.0 -v 01450.1 -c yes'
 }
-echo 'DECKIY CEREBRALNY POSTROEN'
+echo 'HDCP buil finished'
 
 node {
     stage 'Stage 5'
-    mail bcc: '', body: 'build finished DECKIY CEREBRALNY POSTROEN!!!', cc: '', from: '', replyTo: '', subject: 'DECKIY CEREBRALNY POSTROEN', to: 'igor.haykin@sansasecurity.com'
+    mail bcc: '', body: 'build HDCP finished !!!', cc: '', from: '', replyTo: '', subject: 'DECKIY CEREBRALNY POSTROEN', to: 'igor.haykin@sansasecurity.com'
 }
