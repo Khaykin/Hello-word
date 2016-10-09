@@ -4,8 +4,7 @@ node {
 }
 node {
    stage 'Stage 1'
-   echo 'git checkout'
-   echo 'JJOOPPAA JJOOPPAA JJOOPPAA'
+   echo 'Start git checkout'
 }
 //node {
     //sh 'echo AOEU=$(echo aoeu) > propsfile'
@@ -15,6 +14,7 @@ node{
     gitClean()
     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '1', url: 'git@github.com:ARMmbed/ta-DxHDCP.git']]])
     echo 'git cleaned'
+    echo 'Checkout finished'
 }
 /**
  * Clean a Git project workspace.
@@ -48,11 +48,11 @@ echo 'build'
 
 
 node {
-    sh './Scripts/build_hdcp_and_tests.py -p Qualcomm -m MSM8996_LA2.0 -v 01450.1 -c yes'
+    sh './Scripts/build_and_run_all_permutations_linux_linux.sh'
 }
-echo 'HDCP buil finished'
+echo 'HDCP build finished'
 
 node {
     stage 'Stage 5'
-    mail bcc: '', body: 'build HDCP finished for MSM8996_LA2.0 -v 01450.1 !!!', cc: '', from: '', replyTo: '', subject: 'HDCP master builded', to: 'igor.haykin@sansasecurity.com'
+    mail bcc: '', body: 'build HDCP Linux SW finished ', cc: '', from: '', replyTo: '', subject: 'HDCP master builded', to: 'igor.haykin@sansasecurity.com'
 }
